@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="crudApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>        
+</head>
+
+<body ng-controller="productController as vm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Product Management ( 14548 )</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>       
+      </nav>
+    
+    <form ng-submit="vm.addProduct()" class="container mt-3 border p-4">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" class="form-control" id="productName" ng-model="vm.newProduct.Name" placeholder="Product Name" required>
+        </div>
+        <div class="form-group">
+          <label for="productDescription">Description</label>
+          <input type="text" class="form-control" id="productDescription" ng-model="vm.newProduct.Description" placeholder="Description" required>
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Price</label>
+          <input type="text" class="form-control" id="productPrice" ng-model="vm.newProduct.Price" placeholder="Price" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+      </form>
+      
+    <br>
+    
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in vm.products">
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="vm.editProduct(product)" data-toggle="modal"
+                        data-target="#editModal">Edit</button>
+                    <button class="btn btn-danger" ng-click="vm.deleteProduct(product.productId)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="vm.updateProduct()">
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" class="form-control" id="editName" ng-model="vm.editingProduct.name"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Description</label>
+                            <input type="text" class="form-control" id="editDescription"
+                                ng-model="vm.editingProduct.description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrice">Price</label>
+                            <input type="text" class="form-control" id="editPrice" ng-model="vm.editingProduct.price"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
