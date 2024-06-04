@@ -9,8 +9,6 @@
 2. [Application Running Guide](#application-running-guide)
    1. [Running the Back-end Application](#running-the-back-end-application)
    2. [Running the Front-end Application](#running-the-front-end-application)
-3. [Authors](#authors)
-4. [License](#license)
 
 ## Installation Guide
 
